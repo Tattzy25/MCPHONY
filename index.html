@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Voice Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="matrix-bg">
+        <canvas id="matrixCanvas"></canvas>
+    </div>
+    
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo-container">
+                <div class="logo-orb"></div>
+                <h1 class="app-title">VOICE NEXUS</h1>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">READY</span>
+            </div>
+        </header>
+
+        <main class="main-interface">
+            <!-- Voice Analysis Panel -->
+            <div class="voice-analysis-panel">
+                <h3>VOICE SIGNATURE</h3>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <label>LANGUAGE</label>
+                        <div class="value" id="detectedLanguage">--</div>
+                    </div>
+                    <div class="analysis-item">
+                        <label>GENDER</label>
+                        <div class="value" id="detectedGender">--</div>
+                    </div>
+                    <div class="analysis-item">
+                        <label>PITCH</label>
+                        <div class="value" id="detectedPitch">--</div>
+                    </div>
+                    <div class="analysis-item">
+                        <label>CONFIDENCE</label>
+                        <div class="value" id="confidenceLevel">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Visualizer -->
+            <div class="voice-visualizer">
+                <canvas id="voiceCanvas" width="400" height="200"></canvas>
+                <div class="voice-level-indicator">
+                    <div class="level-bar" id="levelBar"></div>
+                </div>
+            </div>
+
+            <!-- Control Center -->
+            <div class="control-center">
+                <div class="main-controls">
+                    <button class="voice-button" id="startVoiceBtn">
+                        <div class="voice-icon">
+                            <div class="mic-indicator"></div>
+                        </div>
+                        <span>VOICE ACTIVATE</span>
+                    </button>
+                    
+                    <div class="language-selector">
+                        <label>OUTPUT LANGUAGE</label>
+                        <select id="targetLanguage">
+                            <option value="en">English</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ru">Russian</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="ar">Arabic</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="message-controls">
+                    <button class="action-btn" id="playbackBtn" disabled>
+                        <span>▶</span> PLAYBACK
+                    </button>
+                    <button class="action-btn" id="sendBtn" disabled>
+                        <span>📤</span> SEND TO FRIEND
+                    </button>
+                    <button class="action-btn" id="clearBtn">
+                        <span>🗑</span> CLEAR
+                    </button>
+                </div>
+            </div>
+
+            <!-- Message Display -->
+            <div class="message-display">
+                <div class="message-header">
+                    <h3>TRANSMISSION LOG</h3>
+                </div>
+                <div class="message-content">
+                    <div class="original-text">
+                        <label>ORIGINAL:</label>
+                        <p id="originalText">Voice input will appear here...</p>
+                    </div>
+                    <div class="translated-text">
+                        <label>TRANSLATED:</label>
+                        <p id="translatedText">Translation will appear here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friend Connection Panel -->
+            <div class="friend-panel">
+                <h3>CONNECT WITH FRIEND</h3>
+                <div class="connection-controls">
+                    <input type="text" id="friendId" placeholder="Enter Friend's Voice ID">
+                    <button class="connect-btn" id="connectBtn">ESTABLISH LINK</button>
+                </div>
+                <div class="connection-status">
+                    <div class="connection-indicator" id="connectionIndicator"></div>
+                    <span id="connectionText">NO CONNECTION</span>
+                </div>
+            </div>
+
+            <!-- Incoming Messages -->
+            <div class="incoming-panel" id="incomingPanel" style="display: none;">
+                <h3>INCOMING TRANSMISSION</h3>
+                <div class="incoming-message">
+                    <p id="incomingText"></p>
+                    <button class="play-incoming-btn" id="playIncomingBtn">
+                        <span>▶</span> PLAY MESSAGE
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="tech-specs">
+                <span>STT/TTS ENGINE: ACTIVE</span>
+                <span>NEURAL TRANSLATION: ONLINE</span>
+                <span>VOICE ID: ENABLED</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p id="loadingText">INITIALIZING VOICE SYSTEMS...</p>
+    </div>
+
+    <script src="voice-analyzer.js"></script>
+    <script src="translation-service.js"></script>
+    <script src="voice-chat.js"></script>
+    <script src="matrix-effect.js"></script>
+</body>
+</html>

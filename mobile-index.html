@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>VoiceChat Network</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="mobile-styles.css">
+    
+    <!-- PWA Meta -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="header">
+            <h1 class="app-logo" id="appLogo">VoiceChat Network</h1>
+            <div class="status-bar">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Voice Interface -->
+        <section class="voice-interface">
+            <button class="voice-button" id="voiceButton">
+                <div class="mic-icon">🎤</div>
+                <span>Hold to Talk</span>
+            </button>
+            
+            <!-- Voice Analysis -->
+            <div class="voice-analysis" id="voiceAnalysis">
+                <div class="analysis-card">
+                    <div class="analysis-label">Language</div>
+                    <div class="analysis-value" id="languageValue">—</div>
+                </div>
+                <div class="analysis-card">
+                    <div class="analysis-label">Gender</div>
+                    <div class="analysis-value" id="genderValue">—</div>
+                </div>
+                <div class="analysis-card">
+                    <div class="analysis-label">Pitch</div>
+                    <div class="analysis-value" id="pitchValue">—</div>
+                </div>
+                <div class="analysis-card">
+                    <div class="analysis-label">Confidence</div>
+                    <div class="analysis-value" id="confidenceValue">—</div>
+                </div>
+            </div>
+
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <select class="language-select" id="outputLanguage">
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                    <option value="it">Italian</option>
+                    <option value="pt">Portuguese</option>
+                    <option value="ru">Russian</option>
+                    <option value="ja">Japanese</option>
+                    <option value="ko">Korean</option>
+                    <option value="zh">Chinese</option>
+                </select>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="control-buttons">
+                <button class="control-button" id="playButton" disabled>▶ Play</button>
+                <button class="control-button danger" id="clearButton">🗑 Clear</button>
+            </div>
+        </section>
+
+        <!-- Message Area -->
+        <section class="message-area">
+            <div class="message-section">
+                <div class="section-title">Original Message</div>
+                <div class="message-content empty" id="originalMessage">
+                    Tap and hold the voice button to record...
+                </div>
+            </div>
+            <div class="message-section">
+                <div class="section-title">Translated Message</div>
+                <div class="message-content empty" id="translatedMessage">
+                    Translation will appear here...
+                </div>
+            </div>
+        </section>
+
+        <!-- Friend Connection -->
+        <section class="friend-section">
+            <h2 class="section-header">Connect with Friends</h2>
+            
+            <input 
+                type="text" 
+                class="friend-input" 
+                id="friendIdInput" 
+                placeholder="Enter friend's Voice ID"
+                maxlength="20"
+            >
+            
+            <div class="connection-status disconnected" id="connectionStatus">
+                <div class="status-dot"></div>
+                <span>Not Connected</span>
+            </div>
+            
+            <div class="control-buttons">
+                <button class="control-button primary" id="connectButton">Connect</button>
+                <button class="control-button" id="sendButton" disabled>📤 Send Voice</button>
+            </div>
+
+            <!-- User's Voice ID -->
+            <div class="message-section">
+                <div class="section-title">Your Voice ID</div>
+                <div class="message-content" id="userVoiceId" style="text-align: center; font-family: monospace; font-weight: 600;">
+                    Loading...
+                </div>
+            </div>
+        </section>
+
+        <!-- Incoming Messages -->
+        <section class="incoming-panel" id="incomingPanel">
+            <div class="incoming-header">📥 Incoming Voice Message</div>
+            <div class="incoming-message" id="incomingMessage">
+                New message received from friend
+            </div>
+            <div class="control-buttons">
+                <button class="control-button primary" id="playIncomingButton">▶ Play Message</button>
+                <button class="control-button" id="replyButton">💬 Reply</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loadingText">Initializing...</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="voice-analyzer.js"></script>
+    <script src="translation-service.js"></script>
+    <script src="voice-mcp-client.js"></script>
+</body>
+</html>
